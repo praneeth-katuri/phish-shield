@@ -14,10 +14,10 @@ from sklearn.base import BaseEstimator, TransformerMixin
 class FeatureExtractor(BaseEstimator, TransformerMixin):
     def __init__(self):
         pass
-    
+
     def fit(self, X, y=None):
         return self
-    
+
     def transform(self, X):
         if not isinstance(X, list):
             X = [X]
@@ -25,7 +25,7 @@ class FeatureExtractor(BaseEstimator, TransformerMixin):
 
         features_list = [self.process_url(url) for url in X]
         return pd.DataFrame(features_list)
-    
+
     '''1. UsingIP : {-1,1}'''
     def using_ip(self, url):
         try:
@@ -416,7 +416,7 @@ class FeatureExtractor(BaseEstimator, TransformerMixin):
     '''30.StatsReport: {-1,1}'''
     def stats_report(self, url):
         try:
-            response = requests.get('https://openphish.com/feed.txt', timeout=2)
+            response = requests.get('https://raw.githubusercontent.com/openphish/public_feed/refs/heads/main/feed.txt', timeout=2)
             response.raise_for_status()
             for line in response.text.split('\n'):
                 line = line.strip()
