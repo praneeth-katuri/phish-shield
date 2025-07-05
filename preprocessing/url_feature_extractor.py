@@ -176,7 +176,7 @@ class FeatureExtractor(BaseEstimator, TransformerMixin):
             for tag in ['img', 'audio', 'embed', 'iframe']:
                 for resource in soup.find_all(tag, src=True):
                     total_resources += 1
-                    dots = [x.start(0) for x in re.finditer('\.', resource['src'])]
+                    dots = [x.start(0) for x in re.finditer(r'\.', resource['src'])]
                     if url in resource['src'] or len(dots) == 1:
                         success += 1
             return -1 if total_resources == 0 else 1 if (success / total_resources) * 100 >= 42.0 else -1
@@ -208,13 +208,13 @@ class FeatureExtractor(BaseEstimator, TransformerMixin):
             soup = BeautifulSoup(response.content, 'html.parser')
 
             for link in soup.find_all('link', href=True):
-                dots = [x.start(0) for x in re.finditer('\.', link['href'])]
+                dots = [x.start(0) for x in re.finditer(r'\.', link['href'])]
                 if url in link['href'] or self.domain in link['href'] or len(dots) == 1:
                     success += 1
                 i += 1
 
             for script in soup.find_all('script', src=True):
-                dots = [x.start(0) for x in re.finditer('\.', script['src'])]
+                dots = [x.start(0) for x in re.finditer(r'\.', script['src'])]
                 if url in script['src'] or self.domain in script['src'] or len(dots) == 1:
                     success += 1
                 i += 1
@@ -293,7 +293,7 @@ class FeatureExtractor(BaseEstimator, TransformerMixin):
         try:
             response = requests.get(url, timeout=2)
             html_content = response.text
-            return 1 if re.findall("<script>.+onmouseover.+</script>", html_content) or re.findall("<style>.+statusbar.+</style>", html_content) or re.findall("<a .+onmouseover.+title=.+>", html_content) or re.findall("addEventListener\('mouseover', .+setStatusBar", html_content) else -1
+            return 1 if re.findall(r"<script>.+onmouseover.+</script>", html_content) or re.findall(r"<style>.+statusbar.+</style>", html_content) or re.findall(r"<a .+onmouseover.+title=.+>", html_content) or re.findall(r"addEventListener\('mouseover', .+setStatusBar", html_content) else -1
         except Exception:
             return -1
 
