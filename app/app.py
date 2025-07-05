@@ -2,10 +2,7 @@ from flask import Flask
 from flask_caching import Cache
 from utils.config import Config
 from app.csrf_init import csrf
-import nltk
 import os
-
-nltk.data.path.append(os.path.join(os.path.dirname(__file__), "../nltk_data"))
 
 # Initialize Flask app
 app = Flask(__name__)

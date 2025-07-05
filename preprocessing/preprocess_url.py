@@ -1,5 +1,9 @@
 import re
 import unicodedata
+import nltk
+import os
+nltk_path = os.path.join(os.path.dirname(__file__), "../nltk_data")
+nltk.data.path = [nltk_path] + nltk.data.path
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from urllib.parse import unquote
@@ -18,7 +22,7 @@ class URLPreprocessor(BaseEstimator, TransformerMixin):
     def preprocess_url(self, url):
         # Decode URL encoding
         url = unquote(url)
-        
+
         # Remove http, https, www
         url = url.replace('http://', '').replace('https://', '').replace('www.', '')
 
