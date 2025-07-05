@@ -60,7 +60,7 @@ def store_results(ML_Model, accuracy_train, accuracy_test, f1_score_train, f1_sc
 
 # Function to perform upsampling of minority class
 def upsample_data(X_train, y_train):
-    
+
     smote = SMOTE(random_state=42)
     X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
 
@@ -109,7 +109,7 @@ def main():
             ('feature_extraction', FeatureExtractor()),
             ('model', best_model)
         ])
-        joblib.dump(ml_pipeline, 'feature_model.joblib')
+        joblib.dump(ml_pipeline, 'models/feature_model.joblib')
         print("Best performing model saved as 'feature_model.joblib'.")
         print(f"The best performing model is: {best_model_name}, with f1-score: {best_f1_score}")
 
