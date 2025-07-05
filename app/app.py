@@ -19,3 +19,7 @@ from app.routes.detect import detect_bp
 
 app.register_blueprint(recaptcha_bp)
 app.register_blueprint(detect_bp)
+
+@app.route("/health")
+def health_check():
+    return "OK", 200
