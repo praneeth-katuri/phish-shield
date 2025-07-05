@@ -17,9 +17,5 @@ cache = Cache(app, config={'CACHE_TYPE': 'filesystem', 'CACHE_DIR': cache_dir})
 from app.routes.recaptcha import recaptcha_bp
 from app.routes.detect import detect_bp
 
-# app.register_blueprint(recaptcha_bp)
-# app.register_blueprint(detect_bp)
-
-@app.route("/")
-def health_check():
-    return "OK", 200
+app.register_blueprint(recaptcha_bp)
+app.register_blueprint(detect_bp)
