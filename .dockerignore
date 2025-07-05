@@ -1,0 +1,9 @@
+**
+
+!app/
+!datasets/top-1m.csv
+!preprocessing/
+!utils/
+
+screenshots/
+tests/
