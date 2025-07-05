@@ -1,8 +1,11 @@
 from flask import Flask
 from flask_caching import Cache
 from utils.config import Config
-from app.csrf_init import csrf 
+from app.csrf_init import csrf
+import nltk
 import os
+
+nltk.data.path.append(os.path.join(os.path.dirname(__file__), "../nltk_data"))
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -19,7 +22,3 @@ from app.routes.detect import detect_bp
 
 app.register_blueprint(recaptcha_bp)
 app.register_blueprint(detect_bp)
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
