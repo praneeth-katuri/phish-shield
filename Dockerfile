@@ -15,4 +15,4 @@ RUN python utils/setup_nltk.py
 
 EXPOSE 8080
 
-CMD ["gunicorn", "app.app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "app.app:app"]
